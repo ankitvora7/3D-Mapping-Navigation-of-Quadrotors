@@ -1,0 +1,2 @@
+dependent_joints:
+  virtual_joint: {parent: world}

@@ -1,0 +1,5 @@
+
+<launch>
+  <include file="$(find quadrotor_moveit_config)/launch/move_group.launch"/>
+  <include file="$(find quadrotor_moveit_config)/launch/quadrotor_moveit_sensor_manager.launch.xml"/>
+ </launch>

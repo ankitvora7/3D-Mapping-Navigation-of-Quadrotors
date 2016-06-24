@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Start Gazebo with wg world running in (max) realtime -->
+  <include file="$(find indoor_slam_with_kinect)/launch/playground.launch"/>
+
+  <!-- Spawn simulated quadrotor uav -->
+  <include file="$(find indoor_slam_with_kinect)/launch/spawn_quadrotor.launch" >
+    <!--Commented laser and added kinect -->
+    <!--arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/-->
+    <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_with_kinect.gazebo.xacro"/>
+
+  </include>
+
+  <!-- Start Kinect
+  <include file="$(find freenect_launch)/launch/freenect.launch"/> -->
+
+  <!-- Start Kinect (freenect) -->
+  <include file="$(find freenect_launch)/launch/freenect.launch"/>
+
+  <!-- Start Octomapping -->
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+		<param name="resolution" value="0.05" />
+
+		<!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+		<param name="frame_id" type="string" value="world" />
+
+		<!-- maximum range to integrate (speedup!) -->
+		<param name="sensor_model/max_range" value="5.0" />
+
+		<!-- data source to integrate (PointCloud2) -->
+		<remap from="cloud_in" to="/camera/depth/points" />
+
+    <!-- Remove ground from the map -->
+    <param name="filter_ground" value="true"/>
+
+	</node>
+
+  <!-- Start Rviz -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find indoor_slam_hardware)/rviz/test_kinect.rviz"/>
+
+
+</launch>

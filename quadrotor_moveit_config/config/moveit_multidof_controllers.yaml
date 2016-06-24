@@ -1,0 +1,20 @@
+# Specify virtual joint name IF the robot has one.
+# Leave unspecified or empty string otherwise.
+virtual_joint_name: "virtual_joint"
+
+# action topic to subscribe to which provides a
+# navigation_actions/PathExecutionAction action for the robot.
+# Required if robot has a virtual joint.
+path_navigation_action_topic: /execute_kinematic_path
+
+# action topic to subscribe to which provides a
+# control_msgs/FollowJointTrajectoryAction action for the robot
+joint_trajectory_action_topic: /trajectory
+
+controller_list:
+  - name: quadrotor_controller 
+    action_ns: only_specified_for_compatibility 
+    type: FollowRobotTrajectory
+    default: true
+    joints:
+      - virtual_joint

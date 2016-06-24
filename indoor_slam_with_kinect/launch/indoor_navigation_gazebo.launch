@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Start map, localization -->
+  <include file="$(find indoor_slam_with_kinect)/launch/indoor_localization_gazebo.launch">
+    <arg name="rviz_file" value="$(find indoor_slam_with_kinect)/rviz/indoor_navigation.rviz" />
+  </include>
+
+  <!-- Start move_group -->
+  <include file="$(find indoor_slam_with_kinect)/launch/moveit_move_group.launch"/>
+
+  <!-- Start the controller -->
+  <node pkg="action_controller" type="action_controller" name="quadrotor_custom_controller"/>
+
+  <!-- Start the state publisher -->
+  <node pkg="indoor_slam_with_kinect" type="publish_joint_states.py" name="publish_joint_states_custom"/>
+
+
+</launch>

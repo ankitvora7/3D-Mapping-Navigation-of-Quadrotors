@@ -1,0 +1,6 @@
+<launch>
+  <rosparam command="load" file="$(find quadrotor_moveit_config)/config/kinect_sensor.yaml" />
+  <param name="octomap_frame" type="string" value="map" />
+  <param name="octomap_resolution" type="double" value="0.05" />
+  <param name="max_range" type="double" value="5.0" />
+</launch>

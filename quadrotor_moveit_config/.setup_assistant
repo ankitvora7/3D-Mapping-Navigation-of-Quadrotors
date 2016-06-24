@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: indoor_slam_with_kinect
+    relative_path: urdf/quadrotor_with_kinect.urdf
+  SRDF:
+    relative_path: config/quadrotor.srdf
+  CONFIG:
+    generated_timestamp: 1460073119
